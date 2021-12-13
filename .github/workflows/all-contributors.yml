@@ -7,7 +7,7 @@ on:
         description: new contributor's name
         required: true
       contributions:
-        description: comma separated list of contributions types
+        description: comma separated list of contributions types ([available types](https://allcontributors.org/docs/en/emoji-key#table))
         required: true
 
 jobs:
