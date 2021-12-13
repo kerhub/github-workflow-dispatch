@@ -18,7 +18,10 @@ jobs:
       - uses: actions/setup-node@v2.4.1
         with:
           node-version: '14'
-      - run: npx all-contributors-cli add ${{github.event.inputs.name}} ${{github.event.inputs.contributions}}
+      - run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com" && \
+          git config --global user.name "github-actions[bot]" && \
+          npx all-contributors-cli add ${{github.event.inputs.name}} ${{github.event.inputs.contributions}}
       - run: npx all-contributors-cli generate
       - name: Commit changes
         shell: bash
