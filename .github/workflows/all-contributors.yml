@@ -19,5 +19,13 @@ jobs:
         with:
           node-version: '14'
           cache: 'npm'
-      - run: npm install -g all-contributors-cli
-      - run: npm run all-contributors add ${{github.event.inputs.name}} ${{github.event.inputs.contributions}}
+      - run: npx all-contributors-cli add ${{github.event.inputs.name}} ${{github.event.inputs.contributions}}
+      - run: npx all-contributors-cli generate
+      - name: Commit changes
+        shell: bash
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com" && \
+          git config --global user.name "github-actions[bot]" && \
+          git add README.md .all-contributorsrc && \
+          git commit -m 'add ${{github.event.inputs.name}} contributor for ${{github.event.inputs.contributions}}' && \
+          git push
