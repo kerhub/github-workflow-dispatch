@@ -1,0 +1,23 @@
+name: add contributor
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: new contributor's name
+        required: true
+      contributions:
+        description: comma separated list of contributions types
+        required: true
+
+jobs:
+  add_contributor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.4.1
+        with:
+          node-version: '14'
+          cache: 'npm'
+      - run: npm install -g all-contributors-cli
+      - run: npm run all-contributors add ${{github.event.inputs.name}} ${{github.event.inputs.contributions}}
